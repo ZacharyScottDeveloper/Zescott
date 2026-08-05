@@ -357,3 +357,18 @@ body {
     background-color: #c0c0c0; 
     flex-shrink: 0;
 }
+
+.proj-section {
+    margin-bottom: 18px;
+}
+
+.proj-section-title {
+    font-size: 13px;
+    font-weight: bold;
+    color: #000080;
+    border-bottom: 1px solid #808080;
+    padding-bottom: 3px;
+    margin-bottom: 8px;
+    font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
+    letter-spacing: 0.3px;
+}
