@@ -1,0 +1,359 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #000000;
+    background-image: url('FTLWALLPAPER.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+body {
+    cursor: url('cursor-small.png') 16 16, auto;
+}
+
+.desktop-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    border: 15px solid #000000;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.program {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+.shortcut {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: grab;
+    user-select: none;
+    width: 84px;
+}
+
+.shortcut:nth-child(1) { top: 20px; left: 20px; }
+.shortcut:nth-child(2) { top: 150px; left: 20px; }
+.shortcut:nth-child(3) { top: 280px; left: 20px; }
+.shortcut:nth-child(4) { top: 410px; left: 20px; }
+.shortcut:nth-child(5) { top: 540px; left: 20px; }
+
+.shortcut:active {
+    cursor: grabbing;
+}
+
+.icon {
+    width: 64px;
+    height: 64px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.projicon { background-image: url('proj-icon.png'); }
+.porticon { background-image: url('port-icon.png'); }
+.resicon { margin-top: 0.4rem; background-image: url('resu-icon.png'); }
+.intfacticon { background-image: url('intfact-icon.png'); }
+.billybiticon { background-image: url('billybit-icon.ico'); }
+.billyboticon { background-image: url('rasppi-icon.png'); }
+
+
+.tab-panel img {
+    max-width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    
+    border: 2px solid;
+    border-color: #808080 #fff #fff #808080; 
+}
+
+.label {
+    font-size: 12px;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    text-align: center;
+}
+
+
+#desktop-windows {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.window {
+    position: absolute;
+    width: 420px;
+    height: 460px;
+    background-color: #c0c0c0;
+    border: 3px solid;
+    border-color: #fff #808080 #808080 #fff;
+    box-shadow: 1px 1px 0 0 #000;
+    display: flex;
+    flex-direction: column;
+    pointer-events: auto;
+}
+
+.window-titlebar {
+    background: linear-gradient(90deg, #000080, #1084d0); 
+    color: white;
+    padding: 4px 6px;
+    font-weight: bold;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: move;
+    user-select: none;
+}
+
+.window-controls button {
+    background-color: #c0c0c0;
+    border: 1px solid;
+    border-color: #fff #808080 #808080 #fff;
+    font-size: 11px;
+    font-weight: bold;
+    width: 16px;
+    height: 14px;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Window Dialog Header Sub-Tabs Selector Strip */
+.window-tab-strip {
+    display: flex;
+    padding-left: 6px;
+    margin-top: 6px;
+    gap: 2px;
+    border-bottom: 1px solid #808080;
+    z-index: 2;
+    user-select: none;
+}
+
+.window-content-tab {
+    background-color: #c0c0c0;
+    border: 1px solid;
+    border-color: #fff #808080 transparent #fff;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
+    cursor: pointer;
+    margin-bottom: -1px;
+}
+
+.window-content-tab.active-inner-tab {
+    padding-top: 5px;
+    margin-top: -2px;
+    font-weight: bold;
+    background-color: #c0c0c0;
+    border-bottom: 2px solid #c0c0c0;
+    z-index: 3;
+}
+
+/* Inner Core Content Window Box Frame */
+.window-body-inset {
+    margin: 8px;
+    padding: 16px;
+    flex-grow: 1;
+    background-color: #c0c0c0;
+    border: 2px solid;
+    border-color: #808080 #fff #fff #808080; /* Inset Box Look */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+/* Tab Panel Display Handling */
+.tab-panel {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.tab-panel.active-panel {
+    display: flex;
+    gap: 20px;
+}
+
+/* Profile / Typography Layout Modules */
+.profile-avatar-frame {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #808080;
+    background-color: #fff;
+    flex-shrink: 0;
+}
+
+.profile-avatar-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.system-text-block {
+    font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
+    font-size: 13px;
+    color: #000;
+    line-height: 1.4;
+}
+
+.system-text-block h2 {
+    font-size: 20px;
+    margin: 0 0 10px 0;
+    font-weight: normal;
+}
+
+/* Lower Window Command Buttons */
+.dialog-footer-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+    padding: 0 8px 8px 8px;
+}
+
+.dialog-footer-actions button {
+    background-color: #c0c0c0;
+    border: 1px solid;
+    border-color: #fff #808080 #808080 #fff;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    padding: 4px 18px;
+    cursor: pointer;
+}
+
+.dialog-footer-actions button:active {
+    border-color: #808080 #fff #fff #808080;
+}
+
+/* ==========================================
+   BOTTOM TRAY TASKBAR HOOKS SYSTEM
+   ========================================== */
+
+.taskbar {
+    position: absolute;
+    bottom: 0; left: 0; width: 100%; height: 40px;
+    background-color: #c0c0c0;
+    border-top: 3px solid #fff;
+    box-shadow: 0 -1px 0 0 #808080;
+    display: flex;
+    align-items: center;
+    padding: 2px 10px;
+    box-sizing: border-box;
+    z-index: 99999;
+}
+
+.start-button {
+    font-weight: bold;
+    background-color: #c0c0c0;
+    border: 2px solid;
+    border-color: #fff #808080 #808080 #fff;
+    padding: 3px 8px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.taskbar-tabs-container {
+    display: flex;
+    gap: 5px;
+    margin-left: 10px;
+    flex-grow: 1;
+}
+
+.taskbar-tab {
+    background-color: #c0c0c0;
+    border: 2px solid;
+    border-color: #fff #808080 #808080 #fff;
+    padding: 3px 10px;
+    font-size: 12px;
+    min-width: 100px;
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    user-select: none;
+}
+
+.taskbar-tab.active-tab {
+    background-color: #e0e0e0;
+    border-color: #808080 #fff #fff #808080;
+    font-weight: bold;
+}
+
+.taskbar-clock {
+    border: 2px solid;
+    border-color: #808080 #fff #fff #808080;
+    padding: 3px 8px;
+    font-size: 12px;
+    background-color: #c0c0c0;
+    user-select: none;
+}
+
+*, *::before, *::after, html, body, a, button, input, iframe, .shortcut, .window-titlebar, .taskbar-tab, .start-button {
+    cursor: url('cursor-small.png') 16 16, default !important;
+}
+
+.shortcut:active, .window-titlebar:active {
+    cursor: url('cursor-small.png') 16 16, move !important;
+}
+
+.window-body-inset {
+    margin: 8px;
+    padding: 16px;
+    flex-grow: 1;
+    background-color: #c0c0c0;
+    border: 2px solid;
+    border-color: #808080 #fff #fff #808080;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; 
+}
+
+
+.tab-panel.active-panel {
+    display: flex;
+    flex-direction: column; 
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+
+.dialog-footer-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+    padding: 0 8px 8px 8px;
+    background-color: #c0c0c0; 
+    flex-shrink: 0;
+}
