@@ -60,29 +60,62 @@ const APP_DATA = {
       }
     ]
   },
-
-  "billy-bot": {
-    title: "Billy Bot - Raspberry Pi Chatbot",
+"billy-bot": {
+    title: "Billy Bot - Raspberry Pi Projects",
     tabs: [
       {
         name: "Overview",
-        content: `<div class="system-text-block"><h2>What is Billy Bot?</h2><p>Billy Bot is a chatbot powered by a Raspberry Pi, designed to provide voice-activated assistance and play a few simple games.</p></div>`
+        content: `
+          <div class="system-text-block">
+            <div class="proj-section">
+              <div class="proj-section-title">📊 Dashboard</div>
+              <p>A real-time information dashboard running on a Raspberry Pi 5, displayed on a Waveshare 1.69" LCD (240×280px, ST7789V2). Shows the current time, date, temperature from Open-Meteo, and the next 3 upcoming iCloud calendar events — all refreshed automatically while the clock ticks every second.</p>
+            </div>
+            <div class="proj-section">
+              <div class="proj-section-title">🎙️ Voice Assistant</div>
+              <p>Billy Bot is a voice-activated assistant powered by a Raspberry Pi. It uses keyword detection to understand spoken commands and respond with pre-recorded audio clips or synthesised speech — similar in approach to early Siri releases — without relying on a large language model.</p>
+            </div>
+          </div>
+        `
       },
       {
         name: "Technical Details",
-        content: `<div class="system-text-block"><h2>Technical Details</h2><p>Billy Bot is built using Python and runs on a Raspberry Pi.</p><p>The chatbot functionality is implemented using a combination of speech recognition and text-to-speech libraries, allowing Billy Bot to understand voice commands and respond according to hardcoded keywords, giving the effect of a language model while only using keyword detection (similar to the early releases of Siri.).</p><p><strong>Privacy Note:</strong> I am not sharing my own voice recordings for privacy reasons. You will need to record and include your own .mp3 files in a <code>Voices/</code> folder for the bot to play them back.</p><p>The speech to text library, <code>speech_recognition</code>, is used to convert spoken language into text. It pulls keywords from the audio input then runs commands based on the keywords. The localized fallback uses the <code>vosk-model-small-en-us-0.15</code> model.</p></div>`
+        content: `
+          <div class="system-text-block">
+            <div class="proj-section">
+              <div class="proj-section-title">📊 Dashboard</div>
+              <p>Built in Python using Pillow (PIL) to render frames pushed to the ST7789V2 over SPI0. Weather is fetched from Open-Meteo every 15 minutes; calendar events are pulled from iCloud via CalDAV every 12 hours. The clock updates every second while all other data is cached between refreshes.</p>
+              <p>Hostname: <strong>billy</strong> — User: <strong>zescott12</strong> — Script: <code>~/dashboard/dashboard.py</code></p>
+            </div>
+            <div class="proj-section">
+              <div class="proj-section-title">🎙️ Voice Assistant</div>
+              <p>Built in Python using speech recognition and text-to-speech libraries. Keyword detection parses spoken input and triggers hardcoded responses, giving the effect of a language model without actually using one. Falls back to the offline Vosk model (<code>vosk-model-small-en-us-0.15</code>) when internet is unavailable.</p>
+            </div>
+          </div>
+        `
       },
       {
         name: "Libraries",
         content: `
           <div class="system-text-block">
-             <h2>Core Dependencies</h2>
-             <p>• <strong>SpeechRecognition:</strong> Handles microphone audio capture and maps speech to text using Google STT API protocols.</p>
-             <p>• <strong>pygame (mixer):</strong> Manages the audio threading engine to play back your pre-recorded .mp3 voice asset clips instantly.</p>
-             <p>• <strong>vosk:</strong> Serves as the localized, fully offline fallback STT framework. Requires the <code>vosk-model-small-en-us-0.15</code> model to be placed in the root directory.</p>
-             <p>• <strong>pyttsx3:</strong> Drives the native offline TTS text-to-speech fallback when reading dynamic calculated string variables.</p>
-             <p>• <strong>word2number:</strong> Parses raw, spoken natural-language word blocks directly into actual mathematical integer values for the smart timer matrix.</p>
-             <p>• <strong>requests:</strong> Runs external API handshakes to fetch current data strings from Open-Meteo and GNews endpoints.</p>
+            <div class="proj-section">
+              <div class="proj-section-title">📊 Dashboard</div>
+              <p>• <strong>adafruit-circuitpython-rgb-display:</strong> Drives the ST7789V2 LCD panel over SPI.</p>
+              <p>• <strong>adafruit-blinka:</strong> CircuitPython compatibility layer for Raspberry Pi GPIO.</p>
+              <p>• <strong>Pillow (PIL):</strong> Renders text and layout onto frames before pushing to the display.</p>
+              <p>• <strong>requests:</strong> Fetches weather data from the Open-Meteo API.</p>
+              <p>• <strong>caldav:</strong> Connects to iCloud to retrieve upcoming calendar events.</p>
+              <p>• <strong>icalendar:</strong> Parses the raw iCal event data returned by CalDAV.</p>
+            </div>
+            <div class="proj-section">
+              <div class="proj-section-title">🎙️ Voice Assistant</div>
+              <p>• <strong>SpeechRecognition:</strong> Captures mic audio and maps speech to text via Google STT.</p>
+              <p>• <strong>pygame (mixer):</strong> Manages playback of pre-recorded .mp3 voice clips.</p>
+              <p>• <strong>vosk:</strong> Offline fallback STT — requires <code>vosk-model-small-en-us-0.15</code> in root.</p>
+              <p>• <strong>pyttsx3:</strong> Native offline TTS for dynamic string responses.</p>
+              <p>• <strong>word2number:</strong> Converts spoken number words into integers for the timer feature.</p>
+              <p>• <strong>requests:</strong> Fetches data from Open-Meteo and GNews endpoints.</p>
+            </div>
           </div>
         `
       },
@@ -90,57 +123,63 @@ const APP_DATA = {
         name: "Instructions",
         content: `
           <div class="system-text-block">
-             <h2>Setup & Deployment</h2>
-             <p><strong>1. Clone Repository:</strong> Open your terminal environment and clone the core directory block using git commands:</p>
-             <p style="padding-left:12px; font-family:Courier, monospace; background:#eaeaea; margin:4px 0;">git clone https://github.com/ZacharyScottDeveloper/Billy-Bot</p>
-             
-             <p><strong>2. Dependency Installation:</strong> Navigate into the folder workspace and run pip to install the required system libraries:</p>
-             <p style="padding-left:12px; font-family:Courier, monospace; background:#eaeaea; margin:4px 0;">pip install -r requirements.txt</p>
-             
-             <p><strong>3. API Configuration:</strong> The weather and news subroutines query external endpoints. Ensure your development environment has internet access on execution.</p>
-             
-             <p><strong>4. Audio Hardware Configuration:</strong> Connect your microphone capture array and speakers. The pygame engine requires a valid audio device initialization to boot.</p>
-
-             <p><strong>5. Voice Assets:</strong> Create a <code>Voices/</code> folder in the root directory and add your own .mp3 recordings. (Note: I am not sharing my own voice for privacy reasons).</p>
-             
-             <p><strong>6. Launch Engine:</strong> Execute the primary runtime file loop inside the terminal wrapper to initialize Billy Bot:</p>
-             <p style="padding-left:12px; font-family:Courier, monospace; background:#eaeaea; margin:4px 0;">python assistant.py</p>
+            <div class="proj-section">
+              <div class="proj-section-title">📊 Dashboard</div>
+              <p><strong>1. Enable SPI:</strong> Run <code>sudo raspi-config</code> → Interface Options → SPI → Enable.</p>
+              <p><strong>2. Fix CE0 conflict:</strong> Add <code>dtoverlay=spi0-0cs</code> to <code>/boot/firmware/config.txt</code> to stop the kernel claiming CE0.</p>
+              <p><strong>3. Fix GPIO library:</strong> Uninstall RPi.GPIO to avoid it shadowing rpi-lgpio (the Pi 5–compatible version):</p>
+              <p style="padding-left:12px; font-family:Courier, monospace; background:#eaeaea; margin:4px 0;">pip uninstall RPi.GPIO</p>
+              <p><strong>4. Install dependencies:</strong></p>
+              <p style="padding-left:12px; font-family:Courier, monospace; background:#eaeaea; margin:4px 0;">pip install adafruit-circuitpython-rgb-display adafruit-blinka caldav icalendar requests Pillow</p>
+              <p><strong>5. Configure:</strong> Set <code>LATITUDE</code>, <code>LONGITUDE</code>, <code>ICLOUD_EMAIL</code>, and <code>ICLOUD_APP_PASSWORD</code> at the top of <code>dashboard.py</code>. Generate an app-specific password at appleid.apple.com.</p>
+              <p><strong>6. Run:</strong></p>
+              <p style="padding-left:12px; font-family:Courier, monospace; background:#eaeaea; margin:4px 0;">python ~/dashboard/dashboard.py</p>
+              <p><strong>7. Auto-start:</strong> Enable the systemd service so it launches on boot:</p>
+              <p style="padding-left:12px; font-family:Courier, monospace; background:#eaeaea; margin:4px 0;">sudo systemctl enable dashboard.service</p>
+            </div>
+            <div class="proj-section">
+              <div class="proj-section-title">🎙️ Voice Assistant</div>
+              <p><strong>1. Clone Repository:</strong></p>
+              <p style="padding-left:12px; font-family:Courier, monospace; background:#eaeaea; margin:4px 0;">git clone https://github.com/ZacharyScottDeveloper/Billy-Bot</p>
+              <p><strong>2. Install Dependencies:</strong></p>
+              <p style="padding-left:12px; font-family:Courier, monospace; background:#eaeaea; margin:4px 0;">pip install -r requirements.txt</p>
+              <p><strong>3. Add Vosk Model:</strong> Place the <code>vosk-model-small-en-us-0.15</code> folder in the project root for offline fallback.</p>
+              <p><strong>4. Add Voice Assets:</strong> Create a <code>Voices/</code> folder and add your own .mp3 recordings. (My own voice files are excluded for privacy.)</p>
+              <p><strong>5. Launch:</strong></p>
+              <p style="padding-left:12px; font-family:Courier, monospace; background:#eaeaea; margin:4px 0;">python assistant.py</p>
+            </div>
           </div>
         `
       },
       {
-        name: "Setup",
-        content: `<div class="system-text-block"><h2>Hardware Setup</h2><p>Billy Bot is designed to run on a Raspberry Pi with a connected microphone and speaker system. Ensure that your audio hardware is properly configured and recognized by the Raspberry Pi before launching the chatbot.</p><p>For optimal performance, use a high-quality USB microphone and a compatible speaker system to ensure clear audio input and output.</p><p><strong>The specific parts I used:</strong></p>
-             
-             <p>Total cost for parts is approximately <strong>$357.34 AUD</strong> (Note: the products I used are likely not the most optimal or cheap choices so more affordable tech is likely better. Do your own research):</p>
-             
-             <p>• <strong>Raspberry Pi 5 ($179.55 AUD):</strong> 
-                <a href="https://core-electronics.com.au/raspberry-pi-5-model-b-4gb.html" target="_blank" class="os-link">Core Electronics</a> 
-                - The 4GB Model processing unit running the voice engine loop.
-             </p>
-             
-             <p>• <strong>UE Wonderboom ($117.82 AUD):</strong> 
-                <a href="https://ultimateears.com" target="_blank" class="os-link">Ultimate Ears</a> 
-                - Sourced speaker element used for audio output playback.
-             </p>
-             
-             <p>• <strong>ChanGeek Microphone ($16.95 AUD):</strong> 
-                <a href="https://www.amazon.com.au/Microphone-Gooseneck-Universal-Compatible-CGS-M1/dp/B08M37224H" target="_blank" class="os-link">Amazon AU</a> 
-                - Mini USB Gooseneck microphone capture interface for keyword extraction.
-             </p>
-             
-             <p>• <strong>Official Power Supply ($21.07 AUD):</strong> 
-                <a href="https://core-electronics.com.au" target="_blank" class="os-link">Core Electronics</a> 
-                - 27W power delivery adapter to prevent undervoltage system dropouts.
-             </p>
-             
-             <p>• <strong>Samsung PRO Endurance ($21.95 AUD):</strong> 
-                <a href="https://amazon.com.au" target="_blank" class="os-link">Amazon AU</a> 
-                - 32GB High-endurance microSD card holding the headless OS lite configuration.
-             </p></div>`
+        name: "Hardware",
+        content: `
+          <div class="system-text-block">
+            <div class="proj-section">
+              <div class="proj-section-title">📊 Dashboard</div>
+              <p><strong>Display:</strong> Waveshare 1.69" LCD — 240×280px, ST7789V2, SPI0.</p>
+              <p><strong>Wiring:</strong></p>
+              <p>• VCC → Pin 1 &nbsp;|&nbsp; GND → Pin 6</p>
+              <p>• DIN → Pin 19 (GPIO10/MOSI) &nbsp;|&nbsp; CLK → Pin 23 (GPIO11/SCLK)</p>
+              <p>• CS → Pin 24 (GPIO8/CE0) &nbsp;|&nbsp; DC → Pin 22 (GPIO25)</p>
+              <p>• RST → Pin 13 (GPIO27) &nbsp;|&nbsp; BL → Pin 12 (GPIO18)</p>
+            </div>
+            <div class="proj-section">
+              <div class="proj-section-title">🎙️ Voice Assistant</div>
+              <p>Total cost: approximately <strong>$357.34 AUD</strong></p>
+              <p>• <strong>Raspberry Pi 5 4GB ($179.55):</strong> Main processing unit — <a href="https://core-electronics.com.au/raspberry-pi-5-model-b-4gb.html" target="_blank">Core Electronics</a></p>
+              <p>• <strong>UE Wonderboom ($117.82):</strong> Speaker for audio output — <a href="https://ultimateears.com" target="_blank">Ultimate Ears</a></p>
+              <p>• <strong>ChanGeek USB Microphone ($16.95):</strong> Gooseneck mic for voice input — <a href="https://www.amazon.com.au/Microphone-Gooseneck-Universal-Compatible-CGS-M1/dp/B08M37224H" target="_blank">Amazon AU</a></p>
+              <p>• <strong>Official Power Supply ($21.07):</strong> 27W adapter — <a href="https://core-electronics.com.au" target="_blank">Core Electronics</a></p>
+              <p>• <strong>Samsung PRO Endurance 32GB microSD ($21.95):</strong> OS storage — <a href="https://amazon.com.au" target="_blank">Amazon AU</a></p>
+            </div>
+          </div>
+        `
       }
     ]
   }
+ 
+  
 };
 
 document.addEventListener('DOMContentLoaded', () => {
