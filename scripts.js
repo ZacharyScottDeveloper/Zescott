@@ -413,3 +413,66 @@ function startTaskbarClock() {
   setInterval(updateTime, 1000);
   updateTime();
 }
+
+<style>
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    display: block;
+  }
+
+  .bg-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .mythology-image {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-height: 80%;
+    max-width: 60%;
+    opacity: 0.5;
+    filter: drop-shadow(0 0 30px rgba(150, 100, 200, 0.4));
+  }
+
+  .mythology-image.glitch {
+    animation: glitch 0.15s infinite;
+  }
+
+  @keyframes glitch {
+    0% {
+      clip-path: polygon(0 0, 100% 0, 100% 20%, 0 20%);
+      transform: translateX(-50%) translateX(2px);
+    }
+    20% {
+      clip-path: polygon(0 30%, 100% 30%, 100% 60%, 0 60%);
+      transform: translateX(-50%) translateX(-2px);
+    }
+    40% {
+      clip-path: polygon(0 70%, 100% 70%, 100% 100%, 0 100%);
+      transform: translateX(-50%) translateX(1px);
+    }
+    60% {
+      clip-path: polygon(0 10%, 100% 10%, 100% 40%, 0 40%);
+      transform: translateX(-50%) translateX(-1px);
+    }
+    80% {
+      clip-path: polygon(0 50%, 100% 50%, 100% 90%, 0 90%);
+      transform: translateX(-50%) translateX(2px);
+    }
+    100% {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      transform: translateX(-50%) translateX(0);
+    }
+  }
