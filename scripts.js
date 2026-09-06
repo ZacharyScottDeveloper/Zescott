@@ -1,10 +1,11 @@
-const whatamils = [
+     const whatamils = [
     "Beginner Developer",
     "Passionate Designer",
+    "Unimaginably Cool Guy",
     "Deep Thinker",
     "High School Student",
     "Cool Guy",
-    "EXtremely Cool Guy",
+    "Extremely Cool Guy",
 ];
 
 const whatamI = document.getElementById("whatamI");
