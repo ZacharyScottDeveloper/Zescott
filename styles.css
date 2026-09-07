@@ -415,7 +415,9 @@ a:hover {
     .interest-grid {
         grid-template-columns: 1fr;
     }
-
+    .nav-bar {
+        display: none;
+    }
     .hero,
     .who,
     .interests,
