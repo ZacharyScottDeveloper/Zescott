@@ -12,6 +12,12 @@
     --space-border: rgba(148, 163, 184, 0.25);
 }
 
+.logo {
+    z-index: 100;
+    margin-left: 20;
+    margin-top: 20;
+}
+
 .scroll-target {
     scroll-margin-top: 100px;
 }
