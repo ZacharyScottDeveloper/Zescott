@@ -13,10 +13,10 @@
 }
 
 .logo {
-    z-index: 100000;
-    margin-left: 50;
-    margin-top: 50;
-    position: absolute;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000000;
 }
 
 .scroll-target {
