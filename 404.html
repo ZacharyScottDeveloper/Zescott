@@ -1,18 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Page Not Found</title>
-</head>
+<head><meta charset="UTF-8"><title>Redirecting...</title></head>
 <body>
+    <h2 id="msg">Checking database...</h2>
 
-    <h1>404 - Page Not Found</h1>
     <script>
-        const brokenPath = window.location.pathname;
-        document.getElementById('wrong-url').textContent = brokenPath;
-        import pages.json
-        
-    </script>
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyOoncYij4GnjUrYgKTM9roDass0SsJzM7ENygGAZy9EYflstwwX6lF12WsrJ6V0FEP/exec";
 
+        async function processRedirect() {
+            const path = window.location.pathname;
+            const slug = path.replace(/^\/|\/$/g, ''); 
+
+            if (!slug || slug === 'url-shortener') {
+                document.getElementById('msg').innerText = "Invalid link.";
+                return;
+            }
+
+            try {
+                // Fetch long URL from your Google Sheet script
+                const response = await fetch(`${GOOGLE_SCRIPT_URL}?slug=${slug}`, { redirect: "follow" });
+                const destinationUrl = await response.text();
+
+                if (destinationUrl !== "NOT_FOUND") {
+                    document.getElementById('msg').innerText = "Redirecting...";
+                    window.location.href = destinationUrl.trim(); // 🚀 Boom! Redirected.
+                } else {
+                    document.getElementById('msg').innerText = "Link not found in database.";
+                }
+            } catch (err) {
+                document.getElementById('msg').innerText = "Error contacting database.";
+            }
+        }
+
+        processRedirect();
+    </script>
 </body>
 </html>
