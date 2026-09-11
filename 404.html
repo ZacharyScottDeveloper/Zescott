@@ -17,13 +17,12 @@
             }
 
             try {
-                // Fetch long URL from your Google Sheet script
                 const response = await fetch(`${GOOGLE_SCRIPT_URL}?slug=${slug}`, { redirect: "follow" });
                 const destinationUrl = await response.text();
 
                 if (destinationUrl !== "NOT_FOUND") {
                     document.getElementById('msg').innerText = "Redirecting...";
-                    window.location.href = destinationUrl.trim(); // 🚀 Boom! Redirected.
+                    window.location.href = destinationUrl.trim();
                 } else {
                     document.getElementById('msg').innerText = "Link not found in database.";
                 }
