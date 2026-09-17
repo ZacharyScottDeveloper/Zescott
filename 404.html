@@ -1,38 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><title>Redirecting...</title><link rel="icon" type="image/x-icon" href="favicon.ico">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redirecting...</title>
+<link rel="icon" href="favicon.ico">
+
+<style>
+:root{
+    --bg:#050816;
+    --panel:rgba(15,23,42,.72);
+    --border:rgba(255,255,255,.08);
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --accent:#7c3aed;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+    font-family:Inter,system-ui,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+/* Background orbs */
+.orb{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(90px);
+    opacity:.35;
+}
+
+.one{
+    width:260px;
+    height:260px;
+    background:#7c3aed;
+    top:-60px;
+    left:-80px;
+}
+
+.two{
+    width:220px;
+    height:220px;
+    background:#2563eb;
+    bottom:-70px;
+    right:-50px;
+}
+
+.three{
+    width:180px;
+    height:180px;
+    background:#0ea5e9;
+    top:55%;
+    left:12%;
+}
+
+.card{
+    position:relative;
+    width:min(90%,500px);
+    padding:42px;
+    border-radius:24px;
+    background:var(--panel);
+    backdrop-filter:blur(20px);
+    border:1px solid var(--border);
+    text-align:center;
+    z-index:1;
+}
+
+.logo{
+    font-size:14px;
+    color:var(--muted);
+    letter-spacing:.25em;
+    margin-bottom:18px;
+    text-transform:uppercase;
+}
+
+h1{
+    font-size:2.2rem;
+    margin-bottom:10px;
+}
+
+p{
+    color:var(--muted);
+    line-height:1.6;
+}
+
+.spinner{
+    width:56px;
+    height:56px;
+    border-radius:50%;
+    border:4px solid rgba(255,255,255,.08);
+    border-top-color:var(--accent);
+    margin:0 auto 24px;
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+    to{transform:rotate(360deg)}
+}
+
+.button{
+    display:inline-block;
+    margin-top:26px;
+    padding:12px 22px;
+    border-radius:12px;
+    text-decoration:none;
+    color:white;
+    background:linear-gradient(135deg,#7c3aed,#2563eb);
+    transition:.25s;
+}
+
+.button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 30px rgba(124,58,237,.35);
+}
+
+.hidden{display:none;}
+</style>
 </head>
+
 <body>
-    <h2 id="msg">Checking database...</h2>
 
-    <script>
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzIEbYZ7h6dGXZY2_lBfK7M5RQVk5byKCSHa9cdCpTtXK2V2vvboQGhA3detWWPCavESQ/exec";
+<div class="orb one"></div>
+<div class="orb two"></div>
+<div class="orb three"></div>
 
-        async function processRedirect() {
-            const path = window.location.pathname;
-            const slug = path.replace(/^\/|\/$/g, ''); 
+<div class="card">
 
-            if (!slug || slug === 'url-shortener') {
-                document.getElementById('msg').innerText = "Invalid link.";
-                return;
-            }
+    <!-- Loading -->
+    <div id="loading">
+        <div class="logo">ZESCOTT</div>
+        <div class="spinner"></div>
+        <h1 id="msg">Checking database...</h1>
+        <p>Please wait while we look up your short link.</p>
+    </div>
 
-            try {
-                const response = await fetch(`${GOOGLE_SCRIPT_URL}?slug=${slug}`, { redirect: "follow" });
-                const destinationUrl = await response.text();
+    <!-- 404 -->
+    <div id="notFound" class="hidden">
+        <div class="logo">ERROR 404</div>
+        <h1>Link not found</h1>
+        <p>
+            This shortened URL doesn't exist, may have expired,
+            or was typed incorrectly.
+        </p>
 
-                if (destinationUrl !== "NOT_FOUND") {
-                    document.getElementById('msg').innerText = "Redirecting...";
-                    window.location.href = destinationUrl.trim();
-                } else {
-                    document.getElementById('msg').innerText = "Link not found in database.";
-                }
-            } catch (err) {
-                document.getElementById('msg').innerText = "Error contacting database.";
-            }
+        <a class="button" href="https://zescott.com">
+            Return Home
+        </a>
+    </div>
+
+</div>
+
+<script>
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzIEbYZ7h6dGXZY2_lBfK7M5RQVk5byKCSHa9cdCpTtXK2V2vvboQGhA3detWWPCavESQ/exec";
+
+async function processRedirect() {
+    const path = window.location.pathname;
+    const slug = path.replace(/^\/|\/$/g, '');
+
+    if (!slug || slug === 'url-shortener') {
+        show404();
+        return;
+    }
+
+    try {
+        const response = await fetch(`${GOOGLE_SCRIPT_URL}?slug=${slug}`, {
+            redirect: "follow"
+        });
+
+        const destinationUrl = await response.text();
+
+        if (destinationUrl !== "NOT_FOUND") {
+            document.getElementById("msg").innerText = "Redirecting...";
+            window.location.href = destinationUrl.trim();
+        } else {
+            show404();
         }
 
-        processRedirect();
-    </script>
+    } catch (err) {
+        show404();
+    }
+}
+
+function show404(){
+    document.getElementById("loading").classList.add("hidden");
+    document.getElementById("notFound").classList.remove("hidden");
+}
+
+processRedirect();
+</script>
+
 </body>
 </html>
