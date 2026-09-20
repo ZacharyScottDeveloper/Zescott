@@ -489,6 +489,9 @@ a:hover {
     border-color: rgba(125, 211, 252, 0.4);
 }
 
+.notable {
+    display: none;
+}
 .shortener-form .input-group {
     display: grid;
     grid-template-columns: 1fr auto;
