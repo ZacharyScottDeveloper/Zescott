@@ -550,6 +550,9 @@ a:hover {
     letter-spacing: 0.05em;
     text-transform: uppercase;
 }
+.non-notable {
+    display: none;
+}
 
 .result-display {
     display: grid;
