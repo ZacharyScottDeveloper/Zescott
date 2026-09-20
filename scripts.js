@@ -49,3 +49,20 @@ function animateCursor() {
 }
 
 animateCursor();
+
+let expanded = false;
+
+const toggleBtn = document.querySelector(".projectsToggle");
+const projects = document.querySelectorAll(".unimportant");
+
+toggleBtn.addEventListener("click", () => {
+    expanded = !expanded;
+
+    projects.forEach(project => {
+        project.classList.toggle("non-notable", !expanded);
+    });
+
+    toggleBtn.textContent = expanded
+        ? "Show fewer projects ˄"
+        : "Show more projects ˅";
+});
