@@ -63,6 +63,6 @@ toggleBtn.addEventListener("click", () => {
     });
 
     toggleBtn.textContent = expanded
-        ? "Show fewer projects ˄"
-        : "Show more projects ˅";
+        ? "Show fewer projects ⌄"
+        : "Show more projects >";
 });
