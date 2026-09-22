@@ -2,9 +2,9 @@
     "Beginner Developer",
     "Passionate Designer",
     "Unimaginably Cool Guy",
-    "Deep Thinker",
-    "High School Student",
-    "Cool Guy",
+    "UX Designer",
+    "Full stack developer",
+    "Self taught python and js begginer",
     "Extremely Cool Guy",
 ];
 
