@@ -4,7 +4,7 @@
     "Unimaginably Cool Guy",
     "UX Designer",
     "Full stack developer",
-    "Self taught python and js begginer",
+    "Self Taught Scripter",
     "Extremely Cool Guy",
 ];
 
