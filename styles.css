@@ -207,8 +207,9 @@ body::before {
 }
 
 .hero {
-    position: sticky;
+    position: fixed;
     z-index: 1;
+    inset: 0;
     min-height: 70vh;
     display: flex;
     flex-direction: column;
@@ -426,6 +427,17 @@ a:hover {
     padding-bottom: 60px;
     border-top: 1px solid rgba(148, 163, 184, 0.15);
     margin-top: 32px;
+}
+
+.content {
+    position: relative;
+    z-index: 5;
+    transform: translateY(100vh);
+    transition: transform 0.35s ease;
+}
+
+.content.active {
+    transform: translateY(0);
 }
 
 @media (max-width: 760px) {
