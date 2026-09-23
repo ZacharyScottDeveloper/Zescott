@@ -18,6 +18,12 @@ if (whatamI) {
     }, 2000);
 }
 
+const content = document.querySelector(".content");
+
+addEventListener("scroll", () => {
+    content.classList.toggle("active", scrollY > 0);
+});
+
 const cursorDot = document.querySelector(".cursor-dot");
 const cursorTail = document.querySelector(".cursor-tail");
 
