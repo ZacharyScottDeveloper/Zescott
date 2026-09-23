@@ -72,3 +72,12 @@ toggleBtn.addEventListener("click", () => {
         ? "Show fewer projects ⌄"
         : "Show more projects >";
 });
+
+const content = document.querySelector(".content");
+
+function updateHero() {
+    content.classList.toggle("active", window.scrollY > 0);
+}
+
+updateHero();
+window.addEventListener("scroll", updateHero);
