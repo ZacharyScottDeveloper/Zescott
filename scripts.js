@@ -18,12 +18,6 @@ if (whatamI) {
     }, 2000);
 }
 
-const content = document.querySelector(".content");
-
-addEventListener("scroll", () => {
-    content.classList.toggle("active", scrollY > 0);
-});
-
 const cursorDot = document.querySelector(".cursor-dot");
 const cursorTail = document.querySelector(".cursor-tail");
 
@@ -72,12 +66,3 @@ toggleBtn.addEventListener("click", () => {
         ? "Show fewer projects ⌄"
         : "Show more projects >";
 });
-
-const content = document.querySelector(".content");
-
-function updateHero() {
-    content.classList.toggle("active", window.scrollY > 0);
-}
-
-updateHero();
-window.addEventListener("scroll", updateHero);
