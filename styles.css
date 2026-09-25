@@ -12,7 +12,8 @@
     --space-border: rgba(148, 163, 184, 0.25);
 }
 
-
+.logo-hero {
+    position: 
 .navbar-container {
   position: relative;
   width: 100%;
@@ -216,6 +217,17 @@ body::before {
     text-align: center;
 }
 
+.logo-hero {
+    margin-bottom: 70vh;
+    position: sticky;
+    z-index: 1;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+    
 .main-hero,
 .who-hero,
 .interests-hero,
