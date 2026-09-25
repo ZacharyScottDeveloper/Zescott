@@ -216,16 +216,14 @@ body::before {
 }
 
 .logo-hero {
-    margin-bottom: 70vh;
-    position: sticky;
-    z-index: 1;
-    min-height: 70vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
+    display: block;
+    width: clamp(180px, 28vw, 340px);
+    height: auto;
+    margin: 80px auto 30px;
+    position: relative;
+    z-index: 2;
 }
-    
+
 .main-hero,
 .who-hero,
 .interests-hero,
