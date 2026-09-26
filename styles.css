@@ -1,3 +1,5 @@
+/* ---------- NAVBAR ---------- */
+
 .nav-bar {
     position: fixed;
     top: 0;
@@ -8,7 +10,6 @@
     align-items: center;
     justify-content: center;
     z-index: 100;
-
     background: rgba(10, 14, 24, 0.6);
     border-bottom: 1px solid rgba(148, 163, 184, 0.18);
     backdrop-filter: blur(8px);
@@ -19,7 +20,7 @@
     color: var(--space-text);
     font-size: 1.06rem;
     font-weight: 500;
-    transition: transform .2s ease, color .2s ease, box-shadow .2s ease, border-color .2s ease;
+    transition: .2s ease;
     border: 1px solid transparent;
     border-radius: 999px;
     padding: 8px 14px;
@@ -28,7 +29,6 @@
 .nav-item a {
     color: inherit;
     text-decoration: none;
-    display: inline-block;
 }
 
 .nav-item:hover {
@@ -39,9 +39,7 @@
     background: rgba(192,132,252,.08);
 }
 
-.nav-item a:hover {
-    text-decoration: none;
-}
+/* ---------- LAYOUT ---------- */
 
 .who,
 .interests,
@@ -53,17 +51,6 @@
 .footer {
     position: relative;
     z-index: 5;
-}
-
-.hero,
-.who,
-.interests,
-.projects,
-.skills,
-.work-experience,
-.blog,
-.contact,
-.footer {
     max-width: 1100px;
     margin: 0 auto;
     padding: 72px 28px;
@@ -72,8 +59,9 @@
 /* ---------- HERO ---------- */
 
 .hero {
-    height: calc(100vh - 72px);
-    margin-top: 72px;
+    width: 100%;
+    min-height: 100vh;
+    padding: 72px 28px 0;
 
     display: flex;
     flex-direction: column;
@@ -89,7 +77,7 @@
     display: block;
     width: clamp(260px, 24vw, 340px);
     height: auto;
-    margin: 0 0 32px;
+    margin-bottom: 32px;
 }
 
 .main-hero,
@@ -102,7 +90,7 @@
 .contact-hero {
     margin: 0 0 16px;
     font-weight: 800;
-    letter-spacing: -0.04em;
+    letter-spacing: -.04em;
     line-height: 1.08;
 }
 
@@ -127,7 +115,7 @@
 }
 
 .whatamI {
-    margin: 16px 0 0;
+    margin-top: 16px;
     font-size: clamp(1.8rem, 2.8vw, 2.8rem);
     color: var(--space-glow);
     text-shadow: 0 0 24px rgba(103,232,249,.45);
@@ -169,47 +157,6 @@
     box-shadow:
         0 18px 40px rgba(15,23,42,.5),
         inset 0 1px 0 rgba(255,255,255,.06);
-}
-
-.who-grid,
-.interest-grid {
-    display: grid;
-    gap: 28px;
-}
-
-.who-grid {
-    grid-template-columns: 260px 1fr;
-    align-items: center;
-}
-
-.profile-pic {
-    width: 100%;
-    max-width: 240px;
-    border-radius: 18px;
-    border: 5px solid rgba(119,16,111,.12);
-    box-shadow: 0 0 28px rgba(107,41,173,.25);
-    justify-self: center;
-}
-
-.who-copy {
-    max-width: 720px;
-}
-
-.who-subtitle {
-    margin: 0 0 12px;
-    color: var(--space-accent-3);
-    font-size: clamp(1.25rem, 2vw, 1.8rem);
-}
-
-.who-desc,
-.project-desc,
-.work-desc,
-.blog-desc,
-.contact-desc,
-.footer-text,
-.interest-desc {
-    color: var(--space-muted);
-    font-size: 1.06rem;
 }
 
 .who-list {
