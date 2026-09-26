@@ -270,6 +270,43 @@ body::before {
         inset 0 1px 0 rgba(255,255,255,.06);
 }
 
+.who-grid {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 28px;
+    align-items: center;
+}
+
+.profile-pic {
+    width: 100%;
+    max-width: 240px;
+    border-radius: 18px;
+    border: 5px solid rgba(119, 16, 111, 0.12);
+    box-shadow: 0 0 28px rgba(107, 41, 173, 0.25);
+    justify-self: center;
+}
+
+.who-copy {
+    max-width: 720px;
+}
+
+.who-subtitle {
+    margin: 0 0 12px;
+    color: var(--space-accent-3);
+    font-size: clamp(1.25rem, 2vw, 1.8rem);
+}
+
+.who-desc,
+.project-desc,
+.work-desc,
+.blog-desc,
+.contact-desc,
+.footer-text,
+.interest-desc {
+    color: var(--space-muted);
+    font-size: 1.06rem;
+}
+
 .who-list {
     margin: 18px 0 0;
     padding-left: 20px;
