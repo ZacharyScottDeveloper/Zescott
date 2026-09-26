@@ -150,7 +150,10 @@ body::before {
     background: rgba(192,132,252,.08);
 }
 
-/* ---------- LAYOUT ---------- */
+.scroll-target {
+    scroll-margin-top: 92px;
+}
+
 
 .who,
 .interests,
@@ -167,7 +170,6 @@ body::before {
     padding: 72px 28px;
 }
 
-/* ---------- HERO ---------- */
 
 .hero {
     width: 100%;
@@ -252,7 +254,6 @@ body::before {
     100% { width: 100px; opacity: .8; }
 }
 
-/* ---------- SECTIONS ---------- */
 
 .who,
 .interests,
