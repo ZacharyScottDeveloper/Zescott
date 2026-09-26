@@ -261,8 +261,8 @@ body::before {
 .work-experience,
 .blog,
 .contact {
-    margin-top: 0;
-    background: rgba(15,23,42,.68);
+    margin-top: 26px;
+    background: rgba(15, 23, 42, 0.68);
     border: 1px solid var(--space-border);
     border-radius: 22px;
     box-shadow:
@@ -281,7 +281,9 @@ body::before {
 }
 
 .interest-grid {
+    display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
 }
 
 .interest-card,
