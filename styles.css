@@ -661,6 +661,14 @@ a:hover {
     font-size: 0.9rem;
 }
 
+.footer-quote {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #c7d2fe;
+    font-style: italic;
+}
+
 @media (max-width: 760px) {
     .site-footer {
         padding: 44px 20px 24px;
