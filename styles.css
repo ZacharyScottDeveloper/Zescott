@@ -566,6 +566,103 @@ a:hover {
     color: var(--space-text);
 }
 
+/* Custom CSS Variables mapping to your site's fonts and color profiles */
+.header-box {
+  border: 2px solid #ffaa44;
+  border-radius: 25px;
+  padding: 10px 25px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(255, 170, 68, 0.3);
+}
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+.form-group label {
+  width: 100px;
+  font-size: 16px;
+}
+.required-star {
+  color: #ff5555;
+}
+input[type="text"], textarea {
+  background-color: #1a0b2e;
+  border: 2px solid #5d3587;
+  border-radius: 15px;
+  color: #fff;
+  padding: 8px 15px;
+  font-family: inherit;
+  width: 100%;
+}
+input[type="text"]:focus, textarea:focus {
+  outline: none;
+  border-color: #ffaa44;
+}
+textarea {
+  height: 100px;
+  resize: vertical;
+}
+button {
+  background-color: #1a0b2e;
+  border: 2px solid #ffaa44;
+  border-radius: 15px;
+  color: #ffaa44;
+  padding: 5px 20px;
+  font-family: inherit;
+  cursor: pointer;
+  margin-left: 100px;
+}
+button:hover {
+  background-color: #ffaa44;
+  color: #1b023a;
+}
+hr {
+  border: 0;
+  border-top: 2px solid #ffaa44;
+  margin: 30px 0;
+  opacity: 0.5;
+}
+.comment-card {
+  background-color: #140724;
+  border: 2px solid #3c1e5e;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 15px;
+}
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+.author-name {
+  color: #ffaa44;
+  font-weight: bold;
+}
+.author-link {
+  color: #7f52ff;
+  text-decoration: none;
+  margin-left: 10px;
+}
+.author-link:hover {
+  text-decoration: underline;
+}
+.comment-date {
+  color: #ffaa44;
+}
+.comment-body {
+  color: #e0d5ed;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+.comment-actions button {
+  margin-left: 0;
+  margin-right: 10px;
+  font-size: 12px;
+  border-color: #5d3587;
+  color: #a88be6;
+}
 
 
 .site-footer {
