@@ -68,8 +68,8 @@ toggleBtn.addEventListener("click", () => {
 });
 
 
-const SUPABASE_URL = 'YOUR_SUPABASE_PROJECT_URL_HERE';
-  const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY_HERE';
+const SUPABASE_URL = 'https://ghqqyqytrmtcrjooupmx.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdocXF5cXl0cm10Y3Jqb291cG14Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA1OTYxMjEsImV4cCI6MjEwNjE3MjEyMX0.Lxx8spDkoSr-7izHTJL18tLjLROIlpvW7-6eqWPyctI';
   const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   const commentForm = document.getElementById('commentForm');
