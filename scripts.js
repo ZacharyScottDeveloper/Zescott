@@ -66,3 +66,85 @@ toggleBtn.addEventListener("click", () => {
         ? "Show fewer projects ⌄"
         : "Show more projects >";
 });
+
+
+const SUPABASE_URL = 'YOUR_SUPABASE_PROJECT_URL_HERE';
+  const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY_HERE';
+  const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const commentForm = document.getElementById('commentForm');
+  const commentsList = document.getElementById('commentsList');
+
+  fetchComments();
+
+  commentForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('nameInput').value;
+    let website = document.getElementById('webInput').value.trim();
+    const message = document.getElementById('msgInput').value;
+
+    if (website && !/^https?:\/\//i.test(website)) {
+      website = 'http:' + '/' + '/' + website;
+    }
+
+    const { error } = await supabase
+      .from('comments')
+      .insert([{ name, website, message }]);
+
+    if (error) {
+      alert('Error saving comment: ' + error.message);
+    } else {
+      commentForm.reset();
+      fetchComments();
+    }
+  });
+
+  async function fetchComments() {
+    const { data: comments, error } = await supabase
+      .from('comments')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      commentsList.innerHTML = '<p style="color:red;">Failed to sync comments.</p>';
+      return;
+    }
+
+    commentsList.innerHTML = '';
+    if (comments.length === 0) {
+      commentsList.innerHTML = '<p style="color: #6a4d93; text-align: center;">No comments yet. Leave a note!</p>';
+      return;
+    }
+
+    comments.forEach(item => {
+      let siteMarkup = '';
+      if (item.website) {
+        siteMarkup = '<a href="' + item.website + '" target="_blank" class="author-link">' + item.name + 's site</a>';
+      }
+      
+      const displayDate = new Date(item.created_at).toLocaleDateString();
+
+      const card = document.createElement('div');
+      card.className = 'comment-card';
+      card.innerHTML = `
+        <div class="comment-header">
+          <div>
+            <span class="author-name">${item.name}</span>
+            ${siteMarkup}
+          </div>
+          <span class="comment-date">${displayDate}</span>
+        </div>
+        <div class="comment-body">${escapeHTML(item.message)}</div>
+        <div class="comment-actions">
+          <button type="button">reply</button>
+          <button type="button">show replies (0)</button>
+        </div>
+      `;
+      commentsList.appendChild(card);
+    });
+  }
+
+  function escapeHTML(str) {
+    return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
+  }
